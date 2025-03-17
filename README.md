@@ -1,46 +1,40 @@
-# Managing Online Exams Platform
+# Managing-online-exams
 
-EduPlatform is a Java-based web application designed to streamline educational course management, testing, and scoring. It supports three user roles—Administrators, Teachers, and Students—offering a robust system for registration, course management, test creation, and evaluation. Built with scalability and flexibility in mind, it adheres to SOLID design principles for future extensibility.
+Managing-online-exams is a Java-based web application designed to manage educational courses, create and administer online tests, and evaluate student performance. Built with Spring Boot and Maven, it supports three roles—Administrators, Teachers, and Students—with a focus on scalability and SOLID design principles.
 
 ## Features
 
 ### Phase A: User & Course Management
-- **Registration**: Users can sign up as a Teacher or Student, entering "Awaiting Approval" status.
-- **Admin Approval**: Admins can view, approve, edit, or change roles for all registered users.
-- **Search & Filter**: Admins can filter users by role, name, or other criteria.
-- **Course Definition**: Admins create courses with details like title, unique ID, start/end dates.
+- **Registration**: Users register as Teachers or Students, entering "Awaiting Approval" status.
+- **Admin Approval**: Admins view, approve, edit, or change roles for all users.
+- **Search & Filter**: Admins filter users by role, name, etc.
+- **Course Definition**: Admins create courses with title, unique ID, start/end dates.
 - **Course Assignment**: Admins assign one teacher per course and add students; teachers can teach multiple courses.
 
 ### Phase B: Test Creation
-- **Teacher Dashboard**: Teachers view their assigned courses and manage tests.
-- **Test Management**: Create, edit, or delete tests with title, description, and duration (in minutes).
+- **Teacher Dashboard**: Teachers manage tests for their assigned courses.
+- **Test Management**: Create, edit, or delete tests with title, description, and duration.
 
 ### Phase C: Question Design
-- **Question Types**:
-  - *Multiple-Choice*: Unlimited options with a specified correct answer.
-  - *Essay*: Text-based questions with student response fields.
-- **Question Bank**: Teachers access and reuse past questions; new questions auto-save to the bank.
-- **Scoring**: Set default scores per question; total test score auto-calculated.
-- **Extensibility**: Designed for easy addition of new question types in the future.
+- **Question Types**: Multiple-choice (unlimited options) and essay questions.
+- **Question Bank**: Teachers reuse and auto-save questions.
+- **Scoring**: Set default scores per question; total test score calculated.
 
 ### Phase D: Student Experience
-- **Course View**: Students see their enrolled courses and available tests.
-- **Test-Taking**: Participate in tests with a countdown timer, navigate questions, and submit answers.
-- **Resilience**: Temporary answer storage for reconnects; no reattempts after completion or timeout.
+- **Course View**: Students see enrolled courses and available tests.
+- **Test-Taking**: Timed tests with navigation, resilience for reconnects, and auto-end on timeout.
 
 ### Phase E: Scoring & Results
-- **Teacher Review**: View test participants and results.
-- **Auto-Scoring**: Multiple-choice questions scored instantly; essay answers manually scored by teachers (within max limits).
+- **Teacher Review**: View participants and results; auto-score multiple-choice, manual score for essays.
 
 ## Installation
 
 ### Prerequisites
 - Java 17
-- Maven (for dependency management)
-- [Database : PostgreSQL]
-- Web server (embedded Spring Boot)
+- Maven (bundled with `mvnw` for convenience)
+- MySQL (or your preferred database)
 
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/miladfrj/managingonlineexams.git
+   git clone https://github.com/miladfrji/Managing-online-exams.git
