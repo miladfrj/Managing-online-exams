@@ -1,0 +1,119 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  <style>
+    .faint {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed;
+      }
+
+  </style>
+</head>
+<body>
+<div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  <h1>Users Details</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Role</th>
+      <th>Approval Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.firstName}"></td>
+      <td th:text="${user.lastName}"></td>
+      <td th:text="${user.role}"></td>
+      <td th:text="${user.approvalStatus}"></td>
+      <td>
+        <form th:action="@{/admin/approve/{userId}(userId=${user.id})}" method="post">
+          <button type="submit"
+                  th:text="${user.approvalStatus == 'APPROVED'} ? 'Approved' : 'Approve'"
+                  th:classappend="${user.approvalStatus == 'APPROVED'} ? 'faint' : ''"
+                  th:disabled="${user.approvalStatus == 'APPROVED'}">Approve</button>
+        </form>
+        <form th:action="@{/admin/edit/{userId}(userId=${user.id})}" method="get">
+          <button type="submit">Edit</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  <h1>Users Details</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Role</th>
+      <th>Approval Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}" class="card" style="animation-delay: ${userStat.count * 0.1}s;">
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.firstName}"></td>
+      <td th:text="${user.lastName}"></td>
+      <td th:text="${user.role}"></td>
+      <td th:text="${user.approvalStatus}"></td>
+      <td>
+        <div class="button-container">
+          <form th:action="@{/admin/approve/{userId}(userId=${user.id})}" method="post">
+            <button type="submit"
+                    th:text="${user.approvalStatus == 'APPROVED'} ? 'Approved' : 'Approve'"
+                    th:classappend="${user.approvalStatus == 'APPROVED'} ? 'faint' : ''"
+                    th:disabled="${user.approvalStatus == 'APPROVED'}">Approve</button>
+          </form>
+          <form th:action="@{/admin/edit/{userId}(userId=${user.id})}" method="get">
+            <button type="submit">Edit</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="#" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</a>
+</div>
+<script>
+  window.addEventListener('scroll', () => {
+    const backToTop = document.querySelector('.back-to-top');
+    if (window.scrollY > 300) backToTop.style.display = 'block';
+    else backToTop.style.display = 'none';
+  });
+</script>
+</body>
+</html>

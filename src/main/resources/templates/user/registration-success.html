@@ -1,0 +1,39 @@
+<!--
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+    <h2>Registration Successful</h2>
+    <p>Your registration was successful! Your account is pending approval by the admin. Please check back later.</p>
+    <a href="/user/login">Go to Login</a>
+</div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+    <h2>Registration Successful</h2>
+    <p>Your registration was successful! Your account is pending approval by the admin. Please check back later.</p>
+    <a th:href="@{/user/login}" class="button">Go to Login</a>
+</div>
+<footer th:replace="~{frame/footer :: footer}"></footer>
+</body>
+</html>

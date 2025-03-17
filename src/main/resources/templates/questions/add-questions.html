@@ -1,0 +1,74 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>add descriptive questions</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>add descriptive questions</h1>
+
+  <form th:action="@{/question/addD/{examId}(examId=${examId})}" th:object="${question}" method="post">
+    <label for="title">question title:</label>
+    <input type="text" id="title" th:field="*{title}" placeholder="question title" required><br><br>
+
+    <label for="questionText">question text:</label>
+    <textarea id="questionText" th:field="*{questionText}" placeholder="question text" required></textarea><br><br>
+
+    <div>
+      <label for="answerText">Your Answer:</label>
+      <textarea id="answerText" name="answerText"></textarea>
+    </div>
+
+    <button type="submit">save question</button>
+  </form>
+
+  <div class="back-link">
+    <a th:href="@{teacher/dashboard}">return</a>
+  </div>
+&lt;!&ndash;  <div>
+    <a th:href="@{/question/{examId}(examId=${examId})}" >
+      return
+    </a>
+  </div>&ndash;&gt;
+</div>
+</body>
+</html>
+
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Descriptive Question</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Add Descriptive Question</h1>
+
+  <form th:action="@{/question/addD/{examId}(examId=${examId})}" th:object="${question}" method="post">
+    <div class="form-group">
+      <label for="title">Question Title:</label>
+      <input type="text" id="title" th:field="*{title}" placeholder="Question Title" required>
+    </div>
+    <div class="form-group">
+      <label for="questionText">Question Text:</label>
+      <textarea id="questionText" th:field="*{questionText}" placeholder="Question Text" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="answerText">Your Answer:</label>
+      <textarea id="answerText" name="answerText"></textarea>
+    </div>
+    <button type="submit">Save Question</button>
+  </form>
+
+  <div class="back-link">
+    <a th:href="@{/teacher/dashboard}">Return</a>
+  </div>
+</div>
+</body>
+</html>

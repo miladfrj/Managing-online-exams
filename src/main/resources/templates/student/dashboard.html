@@ -1,0 +1,63 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Courses</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+&lt;!&ndash; Navbar &ndash;&gt;
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<div class="container">
+  <h2>My Courses</h2>
+
+  &lt;!&ndash; Error Message &ndash;&gt;
+  <div th:if="${errorMessage != null}" class="alert-danger" th:text="${errorMessage}"></div>
+
+  &lt;!&ndash; Courses List &ndash;&gt;
+  <ul th:if="${courses != null and not #lists.isEmpty(courses)}" class="list-group">
+    <li th:each="course : ${courses}" class="list-group-item">
+      <a th:href="@{/student/course/{id}/tests(id=${course.id})}" th:text="${course.title != null} ? ${course.title} : 'Untitled Course'" class="button"></a>
+    </li>
+  </ul>
+  <p th:unless="${courses != null and not #lists.isEmpty(courses)}" class="text-center">No courses enrolled yet.</p>
+</div>
+
+
+&lt;!&ndash; Font Awesome &ndash;&gt;
+<script th:src="@{/js/fontawesome.js}"></script>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Courses</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<div class="container">
+  <h2>My Courses</h2>
+
+  <!-- Error Message -->
+  <div th:if="${errorMessage != null}" class="alert-danger" th:text="${errorMessage}"></div>
+
+  <!-- Courses List -->
+  <ul th:if="${courses != null and not #lists.isEmpty(courses)}" class="custom-list">
+    <li th:each="course : ${courses}" class="custom-list-item">
+      <a th:href="@{/student/course/{id}/tests(id=${course.id})}" th:text="${course.title != null} ? ${course.title} : 'Untitled Course'"></a>
+    </li>
+  </ul>
+  <p th:unless="${courses != null and not #lists.isEmpty(courses)}" class="text-center">No courses enrolled yet.</p>
+</div>
+
+<!-- Font Awesome -->
+<script th:src="@{/js/fontawesome.js}"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!--
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Students</title>
+    <style>
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .student { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .button { background-color: #6b48ff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .button:hover { background-color: #5a3de6; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Students Participating in Test: &lt;!&ndash;<span th:text="${testId}"></span>&ndash;&gt;</h1>
+
+    <div th:each="overview : ${overviews}">
+        <div class="student">
+            <h3>Student: <span th:text="${overview.studentName}"></span></h3>
+            <p>Test Completed: <span th:text="${overview.completed ? 'Yes' : 'No'}"></span></p>
+            <p>Total Score: <span th:text="${overview.totalScore}"></span></p>
+            <a th:href="@{/teacher/review/{studentTestId}(studentTestId=${overview.studentTestId})}" class="button">Review Test</a>
+        </div>
+    </div>
+
+    <a th:href="@{/teacher/dashboard}" class="button">Back to Dashboard</a>
+</div>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Students</title>
+    <style>
+        /* Reset default styles and set a smooth font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body styling with a light background */
+        body {
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container for centered content */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header styling */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6b48ff;
+        }
+
+        /* Student card styling */
+        .student {
+            background: linear-gradient(135deg, #ffffff, #f9fbfd);
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .student:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .student h3 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .student p {
+            color: #7f8c8d;
+            font-size: 1em;
+            margin: 5px 0;
+        }
+
+        .student p span {
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        /* Button styling */
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #6b48ff, #8e5cff);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .button:hover {
+            background: linear-gradient(90deg, #5a3de6, #7d4aff);
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .student {
+                padding: 15px;
+            }
+
+            .button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Students Participating in Test <!--<span th:text="${testId}"></span>--></h1>
+
+    <div th:each="overview : ${overviews}">
+        <div class="student">
+            <h3>Student: <span th:text="${overview.studentName}"></span></h3>
+            <p>Test Completed: <span th:text="${overview.completed ? 'Yes' : 'No'}"></span></p>
+            <p>Total Score: <span th:text="${overview.totalScore != null ? overview.totalScore : 'Not graded yet'}"></span></p>
+            <a th:href="@{/teacher/review/{studentTestId}(studentTestId=${overview.studentTestId})}" class="button">Review Test</a>
+        </div>
+    </div>
+
+    <a th:href="@{/teacher/dashboard}" class="button">Back to Dashboard</a>
+</div>
+</body>
+</html>

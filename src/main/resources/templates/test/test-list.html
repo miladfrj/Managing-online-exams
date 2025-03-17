@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Test List</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  <h1>Tests for Course</h1>
+<!--  <h2 th:text="'Course ID: ' + ${courseId}"></h2>-->
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Time (minutes)</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="test : ${tests}">
+      <td th:text="${test.title}"></td>
+      <td th:text="${test.description}"></td>
+      <td th:text="${test.time}"></td>
+      <td>
+        <a th:href="@{/teacher/edit/{id}(id=${test.id})}" class="button">Edit</a>
+        <a th:href="@{/teacher/delete/{id}(id=${test.id}, courseId=${courseId})}" class="button delete-button">Delete</a>
+        <form th:action="@{/question/{examId}(examId=${test.id})}"  method="get">
+          <button type="submit">Add Question</button>
+        </form>
+        <a th:href="@{/teacher/test/{testId}/students(testId=${test.id})}" class="button">View Students</a>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/teacher/course/{courseId}/new(courseId=${courseId})}" class="button">Add New Test</a>
+</div>
+</body>
+</html>

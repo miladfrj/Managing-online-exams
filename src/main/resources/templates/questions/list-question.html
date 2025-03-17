@@ -1,0 +1,218 @@
+<!--
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Question List</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+<h1>Question List</h1>
+
+&lt;!&ndash; Form to Save Scores &ndash;&gt;
+  <form th:action="@{/question/save-scores/{examId}(examId=${examId})}" method="post">
+    <table border="1">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Question Text</th>
+        <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>New Score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="testQuestion, iterStat : ${questionList}">
+        <td th:text="${testQuestion.question.title}"></td>
+        <td th:text="${testQuestion.question.questionText}"></td>
+        <td th:text="${testQuestion.question.getQuestionType()}"></td>
+        &lt;!&ndash; Edit Button &ndash;&gt;
+
+        <td>
+          <a th:if="${testQuestion.question != null}"
+             th:href="@{/question/edit(examId=${examId}, questionId=${testQuestion.question.id}, typeQuestion=${testQuestion.question.getQuestionType()})}">
+            <button type="button">Edit</button>
+          </a>
+          <span th:unless="${testQuestion.question != null}">Question Missing</span>
+        </td>
+
+        &lt;!&ndash; Delete Button &ndash;&gt;
+        <td>
+          <form th:action="@{/question/delete(examId=${examId}, questionId=${testQuestion.question.id})}" method="post" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+
+        &lt;!&ndash; Score Input &ndash;&gt;
+        <td>
+          <input type="number"
+                 th:name="|scores[${iterStat.index}]|"
+                 th:value="${testQuestion.score}"
+                 step="0.1"
+                 class="form-control score-input"
+                 oninput="updateTotalScore()">
+          <input type="hidden" th:name="|testQuestionIds[${iterStat.index}]|" th:value="${testQuestion.id}">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    &lt;!&ndash; Total Score Display &ndash;&gt;
+    <div class="mt-3">
+      <strong>Total Score:</strong>
+      <span id="totalScore">0</span>
+    </div>
+
+    &lt;!&ndash; Save Scores Button &ndash;&gt;
+    <button type="submit" class="btn-purple">
+      <i class="fas fa-save"></i> Save Scores
+    </button>
+  </form>
+
+  &lt;!&ndash; Add Question Buttons &ndash;&gt;
+  <div>
+    <a th:href="@{/question/addD/{examId}(examId=${examId})}">
+      <button type="button">Add Description Question</button>
+    </a>
+    <a th:href="@{/question/addM/{examId}(examId=${examId})}">
+      <button type="button">Add Multiple Choice Question</button>
+    </a>
+    <a th:href="@{/question/addBank/{examId}(examId=${examId})}">
+      <button type="button">Add from Question Bank</button>
+    </a>
+  </div>
+
+  &lt;!&ndash; Return Link &ndash;&gt;
+  <div>
+    <a th:href="@{test/test-list}">
+      <button type="button">Return</button>
+    </a>
+  </div>
+</div>
+
+&lt;!&ndash; JavaScript for Total Score Calculation &ndash;&gt;
+<script>
+  function updateTotalScore() {
+    const scoreInputs = document.querySelectorAll(".score-input");
+    let totalScore = 0;
+    scoreInputs.forEach(input => {
+      const score = parseFloat(input.value) || 0;
+      totalScore += score;
+    });
+    document.getElementById("totalScore").textContent = totalScore.toFixed(2);
+  }
+  document.addEventListener("DOMContentLoaded", updateTotalScore);
+</script>
+</body>
+</html>
+
+
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Question List</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Question List</h1>
+
+  <!-- Form to Save Scores -->
+  <form th:action="@{/question/save-scores/{examId}(examId=${examId})}" method="post">
+    <table border="1">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Question Text</th>
+        <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>New Score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="testQuestion, iterStat : ${questionList}">
+        <td th:text="${testQuestion.question.title}"></td>
+        <td th:text="${testQuestion.question.questionText}"></td>
+        <td th:text="${testQuestion.question.getQuestionType()}"></td>
+        <!-- Edit Button -->
+        <td>
+          <a th:if="${testQuestion.question != null}"
+             th:href="@{/question/edit(examId=${examId}, questionId=${testQuestion.question.id}, typeQuestion=${testQuestion.question.getQuestionType()})}">
+            <button type="button">Edit</button>
+          </a>
+          <span th:unless="${testQuestion.question != null}">Question Missing</span>
+        </td>
+        <!-- Delete Button -->
+        <td>
+          <form th:action="@{/question/delete(examId=${examId}, questionId=${testQuestion.question.id})}" method="post" style="display:inline;">
+            <button type="submit" class="delete-button">Delete</button>
+          </form>
+        </td>
+        <!-- Score Input -->
+        <td>
+          <input type="number"
+                 th:name="|scores[${iterStat.index}]|"
+                 th:value="${testQuestion.score}"
+                 step="0.1"
+                 class="score-input"
+                 oninput="updateTotalScore()">
+          <input type="hidden" th:name="|testQuestionIds[${iterStat.index}]|" th:value="${testQuestion.id}">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Total Score Display -->
+    <div class="mt-3">
+      <strong>Total Score:</strong>
+      <span id="totalScore">0</span>
+    </div>
+
+    <!-- Save Scores Button -->
+    <button type="submit" class="btn-purple">
+      <i class="fas fa-save"></i> Save Scores
+    </button>
+  </form>
+
+  <!-- Add Question Buttons -->
+  <div class="button-container">
+    <a th:href="@{/question/addD/{examId}(examId=${examId})}">
+      <button type="button">Add Description Question</button>
+    </a>
+    <a th:href="@{/question/addM/{examId}(examId=${examId})}">
+      <button type="button">Add Multiple Choice Question</button>
+    </a>
+    <a th:href="@{/question/addBank/{examId}(examId=${examId})}">
+      <button type="button">Add from Question Bank</button>
+    </a>
+  </div>
+
+  <!-- Return Link -->
+  <div class="back-link">
+    <a th:href="@{test/test-list}">Return</a>
+  </div>
+</div>
+
+<!-- JavaScript for Total Score Calculation -->
+<script>
+  function updateTotalScore() {
+    const scoreInputs = document.querySelectorAll(".score-input");
+    let totalScore = 0;
+    scoreInputs.forEach(input => {
+      const score = parseFloat(input.value) || 0;
+      totalScore += score;
+    });
+    document.getElementById("totalScore").textContent = totalScore.toFixed(2);
+  }
+  document.addEventListener("DOMContentLoaded", updateTotalScore);
+</script>
+</body>
+</html>

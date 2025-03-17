@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Available Tests</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<div class="container">
+  <h1>Available Tests</h1>
+
+  <!-- Error Message -->
+  <div th:if="${errorMessage != null}" class="alert-danger" th:text="${errorMessage}"></div>
+
+  <!-- Tests Table -->
+  <h2>Tests for Course</h2>
+  <table th:if="${tests != null and not #lists.isEmpty(tests)}">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Duration (minutes)</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="test : ${tests}">
+      <td th:text="${test.title != null} ? ${test.title} : 'Untitled Test'"></td>
+      <td th:text="${test.description != null} ? ${test.description} : 'No description'"></td>
+      <td th:text="${test.time != null} ? ${test.time} : 'N/A'"></td>
+      <td>
+        <a th:href="@{/student/test/{testId}/start(testId=${test.id})}" class="button">Start Test</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <p th:unless="${tests != null and not #lists.isEmpty(tests)}" class="text-center">No available tests for this course.</p>
+  <a th:href="@{/student/dashboard}" class="button mt-3">Back to Dashboard</a>
+</div>
+
+<!-- Font Awesome -->
+<script th:src="@{/js/fontawesome.js}"></script>
+</body>
+</html>
+<!--
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Available Tests</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+
+  <style>
+    ul { list-style-type: none; padding: 0; }
+    li { margin: 10px 0; }
+  </style>
+</head>
+<body>
+<h1>Tests for Course: <span th:text="${courseId}"></span></h1>
+<ul>
+  <li th:each="test : ${tests}">
+    <a th:href="@{/student/test/{testId}/participate(testId=${test.id})}" th:text="${test.title}"></a>
+    (Time: <span th:text="${test.time}"></span> minutes)
+  </li>
+</ul>
+<a th:href="@{/student/courses}">Back to Courses</a>
+</body>
+</html>-->

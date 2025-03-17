@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title>Student Home</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  <h1>Welcome to the Student Home Page</h1>
+  <p>We Will Let You know for Any Changes</p>
+</div>
+<footer th:replace="~{frame/footer :: footer}"></footer>
+</body>
+</html>

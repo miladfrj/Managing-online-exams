@@ -1,0 +1,97 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="login-section">
+  <div class="login-container">
+    <div class="login-content">
+      <h2>Welcome Back!</h2>
+      <p>Please login to continue.</p>
+      <div th:if="${errorMessage}" class="alert-success" th:text="${errorMessage}"></div>
+      <form th:action="@{/user/login}" method="post" class="login-form">
+        <div th:if="${errorMessage != null}">
+          <span th:text="${errorMessage}" class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+      <p th:if="${param.error}" style="color: red;">Invalid username or password.</p>
+      <p class="signup-link">Don't have an account? <a th:href="@{/user/signup}">Sign Up</a></p>
+    </div>
+&lt;!&ndash;    <div class="login-image">
+      <img th:src="@{css/images/login2.jpg}" height="981" width="690" alt="login"/>
+    </div>&ndash;&gt;
+  </div>
+</section>
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+
+&lt;!&ndash; Animation Script &ndash;&gt;
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const loginContainer = document.querySelector('.login-container');
+    loginContainer.classList.add('fade-in');
+  });
+</script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="login-section">
+  <div class="login-container">
+    <div class="login-content">
+      <h2>Welcome Back!</h2>
+      <p>Please login to continue.</p>
+      <form th:action="@{/user/login}" method="post" class="login-form">
+        <div th:if="${param.error}" class="error-message">Invalid username or password.</div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required/>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required/>
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+      <p class="signup-link">Don't have an account? <a th:href="@{/user/signup}">Sign Up</a></p>
+    </div>
+  </div>
+</section>
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const loginContainer = document.querySelector('.login-container');
+    loginContainer.classList.add('fade-in');
+  });
+</script>
+</body>
+</html>

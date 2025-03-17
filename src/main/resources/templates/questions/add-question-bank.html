@@ -1,0 +1,90 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>add question from question bank</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>add question from question bank</h1>
+
+  <table border="1">
+    <thead>
+    <tr>
+      <th>title</th>
+      <th>question text</th>
+      <th>type</th>
+      <th>action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="question : ${questionList}">
+      <td th:text="${question.title}"></td>
+      <td th:text="${question.questionText}"></td>
+      <td th:text="${question.questionType}"></td>
+      <td>
+        <form th:action="@{/question/addBank}" method="post">
+          <input type="hidden" name="examId" th:value="${examId}">
+          <input type="hidden" name="questionId" th:value="${question.id}">
+          <button type="submit">add to test</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="back-link">
+    <a th:href="@{teacher/dashboard}">return</a>
+  </div>
+</div>
+</body>
+</html>
+
+
+-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Question from Question Bank</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Add Question from Question Bank</h1>
+
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Question Text</th>
+      <th>Type</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="question : ${questionList}">
+      <td th:text="${question.title}"></td>
+      <td th:text="${question.questionText}"></td>
+      <td th:text="${question.questionType}"></td>
+      <td>
+        <form th:action="@{/question/addBank}" method="post">
+          <input type="hidden" name="examId" th:value="${examId}">
+          <input type="hidden" name="questionId" th:value="${question.id}">
+          <button type="submit">Add to Test</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="back-link">
+    <a th:href="@{/teacher/dashboard}">Return</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    /* Error Stat Styles */
+    .error-stat {
+      font-size: 6rem; /* Larger size for emphasis */
+      font-weight: 700; /* Bold */
+      color: #ff4444; /* Red alert color */
+      margin: 20px 0; /* Spacing */
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    a {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: white;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border-radius: 25px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    a:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animation for the error message */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeIn 0.8s ease-out;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  &lt;!&ndash; Error Stat &ndash;&gt;
+  <div class="error-stat">
+  <h2>Oops! Something Went Wrong</h2>
+  <p th:text="${errorMessage}">error message.</p>
+&lt;!&ndash;   <p>Timestamp: <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></span></p>&ndash;&gt;
+  <a th:href="@{/home}">Go to Home</a>
+  </div>
+</div>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Particle Background */
+    .particle-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(98, 0, 234, 0.3);
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(-100vh); opacity: 0.2; }
+      100% { transform: translateY(0); opacity: 0.5; }
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1s ease-out;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Error Stat Styles */
+    .error-stat {
+      font-size: 8rem;
+      font-weight: 700;
+      color: #ff4444;
+      margin: 0;
+      text-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      color: #2c3e50;
+      margin: 1rem 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #6200ea, #7d2ae8);
+      border-radius: 2px;
+    }
+
+    p {
+      font-size: 1.3rem;
+      color: #555;
+      margin: 1.5rem 0;
+      line-height: 1.6;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      color: white;
+      background: linear-gradient(135deg, #6200ea, #7d2ae8);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(98, 0, 234, 0.3);
+    }
+
+    a:hover {
+      background: linear-gradient(135deg, #3700b3, #5a2ad2);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(98, 0, 234, 0.5);
+    }
+
+    /* Error Message Styling */
+    .error-message {
+      background: #ffebee;
+      color: #ff4444;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+      box-shadow: 0 3px 10px rgba(255, 68, 68, 0.1);
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-10px); }
+    }
+
+    /* Animation for Fade-In */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem;
+        max-width: 90%;
+      }
+
+      .error-stat {
+        font-size: 5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      a {
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Particle Background -->
+<div class="particle-background" id="particles"></div>
+
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  <!-- Error Stat -->
+  <div class="error-stat">404</div>
+  <h2>Oops! Something Went Wrong</h2>
+  <div class="error-message" th:text="${errorMessage}">An error occurred.</div>
+  <!-- Uncomment if you want to display the timestamp -->
+  <!-- <p>Timestamp: <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></span></p> -->
+  <a th:href="@{/home}">Go to Home</a>
+</div>
+
+<!-- JavaScript for Particle Background -->
+<script>
+  function createParticles() {
+    const particleContainer = document.getElementById('particles');
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.width = `${Math.random() * 10 + 5}px`;
+      particle.style.height = particle.style.width;
+      particle.style.left = `${Math.random() * 100}vw`;
+      particle.style.top = `${Math.random() * 100}vh`;
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+      particleContainer.appendChild(particle);
+    }
+  }
+
+  window.onload = createParticles;
+</script>
+</body>
+</html>

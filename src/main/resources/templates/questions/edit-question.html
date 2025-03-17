@@ -1,0 +1,115 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit question</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Edit question</h1>
+
+  &lt;!&ndash; Descriptive Question Form &ndash;&gt;
+  <div th:if="${typeQuestion == 'DESCRIPTION'}">
+    <form th:action="@{/question/editDescriptive/{examId}(examId=${examId})}" method="post">
+      <input type="hidden" name="questionId" th:value="${question.id}"/>
+      <label>Title:</label>
+      <input type="text" name="questionTitle" th:value="${question.title}" required/>
+      <label>Question Text:</label>
+      <textarea name="questionText" th:text="${question.questionText}" required></textarea>
+      <button type="submit">Update</button>
+    </form>
+  </div>
+
+  &lt;!&ndash; Multiple Choice Question Form &ndash;&gt;
+  <div th:if="${typeQuestion == 'MULTIPLE_CHOICE'}">
+    <form th:action="@{/question/editMultiple-choice/{examId}(examId=${examId})}" method="post" th:object="${question}">
+      <input type="hidden" th:field="*{id}"/>
+      <label>Title:</label>
+      <input type="text" th:field="*{title}" required/>
+      <label>Question Text:</label>
+      <textarea th:field="*{questionText}" required></textarea>
+      <label>Options:</label>
+      <ul>
+        <li th:each="option, iterStat : ${options}">
+          <input type="text" th:field="*{options[__${iterStat.index}__]}" required/>
+        </li>
+      </ul>
+      <label>Correct Answer:</label>
+      <input type="text" th:field="*{correctAnswer}" required/>
+      <button type="submit">Update</button>
+    </form>
+  </div>
+
+  &lt;!&ndash; Back Link &ndash;&gt;
+  <div class="back-link">
+    <a th:href="@{/teacher/dashboard}">return</a>
+  </div>
+</div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Question</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Edit Question</h1>
+
+  <!-- Descriptive Question Form -->
+  <div th:if="${typeQuestion == 'DESCRIPTION'}">
+    <form th:action="@{/question/editDescriptive/{examId}(examId=${examId})}" method="post">
+      <input type="hidden" name="questionId" th:value="${question.id}"/>
+      <div class="form-group">
+        <label>Title:</label>
+        <input type="text" name="questionTitle" th:value="${question.title}" required/>
+      </div>
+      <div class="form-group">
+        <label>Question Text:</label>
+        <textarea name="questionText" th:text="${question.questionText}" required></textarea>
+      </div>
+      <button type="submit">Update</button>
+    </form>
+  </div>
+
+  <!-- Multiple Choice Question Form -->
+  <div th:if="${typeQuestion == 'MULTIPLE_CHOICE'}">
+    <form th:action="@{/question/editMultiple-choice/{examId}(examId=${examId})}" method="post" th:object="${question}">
+      <input type="hidden" th:field="*{id}"/>
+      <div class="form-group">
+        <label>Title:</label>
+        <input type="text" th:field="*{title}" required/>
+      </div>
+      <div class="form-group">
+        <label>Question Text:</label>
+        <textarea th:field="*{questionText}" required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Options:</label>
+        <ul>
+          <li th:each="option, iterStat : ${options}">
+            <input type="text" th:field="*{options[__${iterStat.index}__]}" required/>
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label>Correct Answer:</label>
+        <input type="text" th:field="*{correctAnswer}" required/>
+      </div>
+      <button type="submit">Update</button>
+    </form>
+  </div>
+
+  <!-- Back Link -->
+  <div class="back-link">
+    <a th:href="@{/teacher/dashboard}">Return</a>
+  </div>
+</div>
+</body>
+</html>

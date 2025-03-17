@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Score Student Test</title>
+</head>
+<body>
+<h1>Test: <span th:text="${studentTest.testId.name}"></span></h1>
+<div th:if="${errorMessage}" style="color: red;">
+  <p th:text="${errorMessage}"></p>
+</div>
+
+<form th:action="@{/teacher/scoring/test/{testId}/student/{studentTestId}/score(testId=${testId}, studentTestId=${studentTest.id})}" method="post">
+  <div th:each="question : ${studentTest.test.testQuestions}">
+    <h3 th:text="${question.title}"></h3>
+    <p th:text="${question.questionText}"></p>
+    <div th:if="${question instanceof T(ir.maktabsharif.finalprojectphase12.entity.question.MultipleChoiceQuestion)}">
+      <ul>
+        <li th:each="option : ${question.options}">
+          <label>
+            <input type="radio" th:name="response" th:value="${option.id}" th:checked="${option.id == studentTest.getResponse(question.id)}" />
+            <span th:text="${option.text}"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div th:if="${question instanceof T(ir.maktabsharif.finalprojectphase12.entity.question.EssayQuestion)}">
+      <textarea th:field="*{score[${question.id}]}"></textarea>
+    </div>
+  </div>
+
+  <button type="submit">Save Score</button>
+</form>
+</body>
+</html>

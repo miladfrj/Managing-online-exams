@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Edit Course</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+    <h1 th:text="${course.id == null} ? 'Add New Course' : 'Edit Course'"></h1>
+    <form th:action="|/admin/courses${course.id == null ? '/add' : '/edit'}|" th:object="${course}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+      <!--  <label for="courseCode">Course Code:</label>
+        <input type="text" id="courseCode" th:field="*{courseCode}" required />-->
+
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}" required />
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" th:field="*{startDate}" required />
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" th:field="*{endDate}" required />
+
+        <label for="teacher">Teacher:</label>
+        <select id="teacher" th:field="*{teacherId}" required>
+            <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.username}"></option>
+        </select>
+
+        <button type="submit">Save Course</button>
+    </form>
+</div>
+</body>
+</html>

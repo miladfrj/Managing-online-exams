@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test Participants</title>
+</head>
+<body>
+<h1>Participants for Test <span th:text="${testId}"></span></h1>
+<div th:if="${errorMessage}" style="color: red;">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<ul>
+    <li th:each="participant : ${participants}">
+        <a th:href="@{/teacher/scoring/test/{testId}/student/{studentTestId}(testId=${testId}, studentTestId=${participant.id})}">
+            <span th:text="${participant.studentName}"></span>
+        </a>
+    </li>
+</ul>
+</body>
+</html>

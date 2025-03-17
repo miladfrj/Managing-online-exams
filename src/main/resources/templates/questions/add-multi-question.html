@@ -1,0 +1,123 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Multiple Choice Question</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+    <h1>Create Multiple Choice Question</h1>
+    <form th:action="@{/question/addM/{examId}(examId = ${examId})}" method="post" th:object="${question}">
+        <input type="hidden" name="testId" th:value="${testId}">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required>
+        </div>
+        <div>
+            <label for="questionText">Question Text:</label>
+            <textarea id="questionText" th:field="*{questionText}" required></textarea>
+        </div>
+        <div id="options-container">
+            <div class="option mb-2">
+                <input type="text" name="options" class="form-control" placeholder="Option 1" required>
+                <input type="radio" name="correctAnswer" value="0"> Correct
+            </div>
+            <div class="option mb-2">
+                <input type="text" name="options" class="form-control" placeholder="Option 2" required>
+                <input type="radio" name="correctAnswer" value="1"> Correct
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary mt-2" onclick="addOption()">Add Option</button>
+        &lt;!&ndash;<div>
+            <label for="defaultScore">Default Score:</label>
+            <input type="number" id="defaultScore" th:field="*{defaultScore}" step="0.1" required>
+        </div>&ndash;&gt;
+        <button type="submit">Create Question</button>
+    </form>
+    <div>
+        <a th:href="@{/question/{examId}(examId=${examId})}" >
+            return
+        </a>
+    </div>
+
+    <script>
+        let optionCount = 2; // Initial option count
+
+        function addOption() {
+            const optionsContainer = document.getElementById("options-container");
+            const newOption = document.createElement("div");
+            newOption.classList.add("option", "mb-2");
+            newOption.innerHTML = `
+            <input type="text" name="options" class="form-control" placeholder="Option ${optionCount + 1}" required>
+            <input type="radio" name="correctAnswer" value="${optionCount}"> Correct
+        `;
+            optionsContainer.appendChild(newOption);
+            optionCount++;
+        }
+    </script>
+</div>
+
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Multiple Choice Question</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+    <h1>Create Multiple Choice Question</h1>
+    <form th:action="@{/question/addM/{examId}(examId=${examId})}" method="post" th:object="${question}">
+        <input type="hidden" name="testId" th:value="${testId}">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required>
+        </div>
+        <div class="form-group">
+            <label for="questionText">Question Text:</label>
+            <textarea id="questionText" th:field="*{questionText}" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Options:</label>
+            <div id="options-container">
+                <div class="option">
+                    <input type="text" name="options" class="form-control" placeholder="Option 1" required>
+                    <input type="radio" name="correctAnswer" value="0"> Correct
+                </div>
+                <div class="option">
+                    <input type="text" name="options" class="form-control" placeholder="Option 2" required>
+                    <input type="radio" name="correctAnswer" value="1"> Correct
+                </div>
+            </div>
+        </div>
+        <button type="button" class="button" onclick="addOption()">Add Option</button>
+        <button type="submit">Create Question</button>
+    </form>
+    <div class="back-link">
+        <a th:href="@{/question/{examId}(examId=${examId})}">Return</a>
+    </div>
+
+    <script>
+        let optionCount = 2;
+
+        function addOption() {
+            const optionsContainer = document.getElementById("options-container");
+            const newOption = document.createElement("div");
+            newOption.classList.add("option");
+            newOption.innerHTML = `
+                <input type="text" name="options" class="form-control" placeholder="Option ${optionCount + 1}" required>
+                <input type="radio" name="correctAnswer" value="${optionCount}"> Correct
+            `;
+            optionsContainer.appendChild(newOption);
+            optionCount++;
+        }
+    </script>
+</div>
+</body>
+</html>

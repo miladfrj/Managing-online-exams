@@ -1,0 +1,146 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="signup-section">
+    <div class="signup-container">
+        <div class="signup-content">
+            <h2>Create Your Account</h2>
+            <p>Join us and start your learning journey today.</p>
+            <form th:action="@{/user/signup}" method="post" th:object="${signUpRequestDto}" class="signup-form">
+                <div th:if="${errorMessage != null}">
+                    <p th:text="${errorMessage}" class="error-message"></p>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" th:field="*{username}" required />
+                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" th:field="*{password}" required />
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" th:field="*{email}" required />
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required />
+                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required />
+                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" th:field="*{role}">
+                        <option value="STUDENT">Student</option>
+                        <option value="TEACHER">Teacher</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-signup">Register</button>
+            </form>
+        </div>
+  &lt;!&ndash;      <div class="signup-image">
+            <img th:src="@{/images/login.jpg}" alt="Login Image" />
+        </div>&ndash;&gt;
+    </div>
+</section>
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+
+&lt;!&ndash; Animation Script &ndash;&gt;
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const signupContainer = document.querySelector('.signup-container');
+        signupContainer.classList.add('fade-in');
+    });
+</script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="signup-section">
+    <div class="signup-container">
+        <div class="signup-content">
+            <h2>Create Your Account</h2>
+            <p>Join us and start your learning journey today.</p>
+            <form th:action="@{/user/signup}" method="post" th:object="${signUpRequestDto}" class="signup-form">
+                <div th:if="${errorMessage != null}" class="error-message" th:text="${errorMessage}"></div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" th:field="*{username}" required/>
+                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" th:field="*{password}" required/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" th:field="*{email}" required/>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required/>
+                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required/>
+                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" th:field="*{role}">
+                        <option value="STUDENT">Student</option>
+                        <option value="TEACHER">Teacher</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-signup">Register</button>
+            </form>
+            <p class="login-link">Already have an account? <a th:href="@{/user/login}">Login</a></p>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const signupContainer = document.querySelector('.signup-container');
+        signupContainer.classList.add('fade-in');
+    });
+</script>
+</body>
+</html>

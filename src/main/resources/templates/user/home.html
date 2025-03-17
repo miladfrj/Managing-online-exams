@@ -1,0 +1,116 @@
+<!--
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Learning Management System</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to the Future of Learning</h1>
+        <div class="hero-buttons">
+            <a th:href="@{/user/signup}" class="button primary">Get Started</a>
+            <a th:href="@{/user/login}" class="button secondary">Login</a>
+        </div>
+    </div>
+    <div class="hero-image">
+<img th:src="@{/images/login.jpg}">
+    </div>
+</section>
+
+
+
+<section class="features">
+    <h2>Why Choose Us?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Expert Instructors</h3>
+            <p>Learn from the best instructors in the industry with years of experience.</p>
+            <img th:src="@{/images/11.jpg}">
+        </div>
+        <div class="feature-card">
+            <h3>Interactive Courses</h3>
+            <p>Engage with interactive courses designed to enhance your learning experience.</p>
+            <img th:src="@{/images/77.jpg}">
+        </div>
+    </div>
+</section>
+
+
+<section class="cta">
+    <h2>Ready to Start Your Learning Journey?</h2>
+    <p>Join thousands of learners and educators today. Sign up now and unlock your potential.</p>
+    <a th:href="@{/user/signup}" class="button primary">Sign Up Now</a>
+</section>
+
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Learning Management System</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to the Future of Learning</h1>
+        <div class="hero-buttons">
+            <a th:href="@{/user/signup}" class="button primary">Get Started</a>
+            <a th:href="@{/user/login}" class="button secondary">Login</a>
+        </div>
+    </div>
+    <div class="hero-image">
+        <img th:src="@{/images/login.jpg}" alt="Learning Experience"/>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Why Choose Us?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>Expert Instructors</h3>
+            <p>Learn from the best instructors with years of industry experience.</p>
+            <img th:src="@{/images/11.jpg}" alt="Expert Instructors"/>
+        </div>
+        <div class="feature-card">
+            <h3>Interactive Courses</h3>
+            <p>Engage with courses designed to enhance your learning experience.</p>
+            <img th:src="@{/images/77.jpg}" alt="Interactive Courses"/>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <h2>Ready to Start Your Learning Journey?</h2>
+    <p>Join thousands of learners and educators today. Sign up now and unlock your potential.</p>
+    <a th:href="@{/user/signup}" class="button">Sign Up Now</a>
+</section>
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+
+<a href="#" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</a>
+<script>
+    window.addEventListener('scroll', () => {
+        const backToTop = document.querySelector('.back-to-top');
+        if (window.scrollY > 300) backToTop.style.display = 'block';
+        else backToTop.style.display = 'none';
+    });
+</script>
+</body>
+</html>

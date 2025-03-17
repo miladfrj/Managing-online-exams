@@ -1,0 +1,117 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create/Edit Test</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  <h1 th:text="${test.id != null} ? 'Edit Test' : 'Create New Test'"></h1>
+
+  &lt;!&ndash; Form for updating an existing test &ndash;&gt;
+  <form th:object="${test}" th:action="@{/teacher/update/{testId}(testId=${testId})}" th:if="${test.id != null}" method="post">
+    <input type="hidden" th:field="*{id}" id="updateId" />
+    <input type="hidden" th:field="*{courseId}" id="updateCourseId" />
+
+    <label for="updateTitle">Title:</label>
+    <input type="text" id="updateTitle" th:field="*{title}" required />
+&lt;!&ndash;    <div th:if="${#fields.hasErrors('title')}" class="error-message" th:errors="*{title}"></div>&ndash;&gt;
+
+    <label for="updateDescription">Description:</label>
+    <textarea id="updateDescription" th:field="*{description}" required></textarea>
+&lt;!&ndash;    <div th:if="${#fields.hasErrors('description')}" class="error-message" th:errors="*{description}"></div>&ndash;&gt;
+
+
+    <label for="updateTime">Time (minutes):</label>
+    <input type="number" id="updateTime" th:field="*{time}" required />
+&lt;!&ndash;    <div th:if="${#fields.hasErrors('time')}" class="error-message" th:errors="*{time}"></div>&ndash;&gt;
+
+    <button type="submit">Update Test</button>
+  </form>
+
+  &lt;!&ndash; Form for creating a new test &ndash;&gt;
+  <form th:object="${test}" method="post" th:action="@{/teacher/create}" th:unless="${test.id != null}">
+    <input type="hidden" th:field="*{id}" id="createId" />
+    <input type="hidden" th:field="*{courseId}" id="createCourseId" />
+
+    <label for="createTitle">Title:</label>
+    <input type="text" id="createTitle" th:field="*{title}" required />
+&lt;!&ndash;    <div th:if="${#fields.hasErrors('title')}" class="error-message" th:errors="*{title}"></div>&ndash;&gt;
+
+
+    <label for="createDescription">Description:</label>
+    <textarea id="createDescription" th:field="*{description}" required></textarea>
+&lt;!&ndash;    <div th:if="${#fields.hasErrors('description')}" class="error-message" th:errors="*{description}"></div>&ndash;&gt;
+
+
+    <label for="createTime">Time (minutes):</label>
+    <input type="number" id="createTime" th:field="*{time}" required />
+&lt;!&ndash;    <div th:if="${#fields.hasErrors('time')}" class="error-message" th:errors="*{time}"></div>&ndash;&gt;
+
+    <button type="submit">Create Test</button>
+  </form>
+</div>
+</body>
+</html>
+
+
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create/Edit Test</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+  <h1 th:text="${test.id != null} ? 'Edit Test' : 'Create New Test'"></h1>
+
+  <!-- Form for updating an existing test -->
+  <form th:object="${test}" th:action="@{/teacher/update/{testId}(testId=${testId})}" th:if="${test.id != null}" method="post">
+    <input type="hidden" th:field="*{id}" id="updateId" />
+    <input type="hidden" th:field="*{courseId}" id="updateCourseId" />
+
+    <label for="updateTitle">Title:</label>
+    <input type="text" id="updateTitle" th:field="*{title}" required />
+
+    <label for="updateDescription">Description:</label>
+    <textarea id="updateDescription" th:field="*{description}" required></textarea>
+
+    <label for="updateTime">Time (minutes):</label>
+    <input type="number" id="updateTime" th:field="*{time}" required />
+
+    <button type="submit">Update Test</button>
+  </form>
+
+  <!-- Form for creating a new test -->
+  <form th:object="${test}" method="post" th:action="@{/teacher/create}" th:unless="${test.id != null}">
+    <input type="hidden" th:field="*{id}" id="createId" />
+    <input type="hidden" th:field="*{courseId}" id="createCourseId" />
+
+    <label for="createTitle">Title:</label>
+    <input type="text" id="createTitle" th:field="*{title}" required />
+
+    <label for="createDescription">Description:</label>
+    <textarea id="createDescription" th:field="*{description}" required></textarea>
+
+    <label for="createTime">Time (minutes):</label>
+    <input type="number" id="createTime" th:field="*{time}" required />
+
+    <button type="submit">Create Test</button>
+  </form>
+  </div>
+<!--<form th:action="@{/question/{examId}(examId=${test.id})}"  method="get">
+  <button type="submit">Add Question</button>
+</form>-->
+
+</body>
+</html>
+

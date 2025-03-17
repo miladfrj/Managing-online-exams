@@ -1,0 +1,24 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Test Result</title>
+  <style>
+    ul { list-style-type: none; padding: 0; }
+    li { margin: 10px 0; }
+  </style>
+</head>
+<body>
+<h1>Test Result</h1>
+<p>Your Score: <span th:text="${score} ?: 0.0"></span> points</p>
+<h2>Answers</h2>
+<ul>
+  <li th:each="answer : ${answers}">
+    Question: <span th:text="${answer.testQuestion.question.title}"></span>,
+    Your Answer: <span th:text="${answer.answer != null ? answer.answer : 'Unanswered'}"></span>
+  </li>
+</ul>
+<a th:href="@{/student/courses}">Back to Courses</a>
+<div th:if="${error}" th:text="${error}" style="color: red;"></div>
+</body>
+</html>-->

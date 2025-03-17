@@ -1,0 +1,48 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Not Approved</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="not-approved-section">
+    <div class="container">
+        <h2>Account Not Approved</h2>
+        <p th:text="${message}"></p>
+        <p>If you believe this is an error, please contact the administrator.</p>
+    </div>
+</section>
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Not Approved</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert-danger" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+
+<section class="not-approved-section">
+    <div class="container">
+        <h2>Account Not Approved</h2>
+        <p th:text="${message}"></p>
+        <p>If you believe this is an error, please contact the administrator.</p>
+        <a th:href="@{/user/login}" class="button">Back to Login</a>
+    </div>
+</section>
+
+<footer th:replace="~{frame/footer :: footer}"></footer>
+</body>
+</html>

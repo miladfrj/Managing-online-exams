@@ -1,0 +1,153 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+    <h1>User Search</h1>
+    <form th:action="@{/admin/search}" method="get">
+        <label for="role">Role:</label>
+        <select id="role" name="role">
+            <option value="">All</option>
+            <option value="TEACHER">Teacher</option>
+            <option value="STUDENT">Student</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstname" />
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastname" />
+
+        <label for="status">Approval Status:</label>
+        <select id="status" name="approvalStatus">
+            <option value="">All</option>
+            <option value="PENDING">Pending</option>
+            <option value="APPROVED">Approved</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>User List</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Approval Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.approvalStatus}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container card">
+    <h1>User Search</h1>
+    <form th:action="@{/admin/search}" method="get" class="search-form">
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+                <option value="">All</option>
+                <option value="TEACHER">Teacher</option>
+                <option value="STUDENT">Student</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstname"/>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastname"/>
+        </div>
+        <div class="form-group">
+            <label for="status">Approval Status:</label>
+            <select id="status" name="approvalStatus">
+                <option value="">All</option>
+                <option value="PENDING">Pending</option>
+                <option value="APPROVED">Approved</option>
+            </select>
+        </div>
+        <button type="submit">Search Now</button>
+    </form>
+
+    <h2>User List</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Approval Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}" class="card" >
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.approvalStatus}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="#" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</a>
+</div>
+<script>
+    window.addEventListener('scroll', () => {
+        const backToTop = document.querySelector('.back-to-top');
+        if (window.scrollY > 300) backToTop.style.display = 'block';
+        else backToTop.style.display = 'none';
+    });
+</script>
+<style>
+    .search-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    .search-form button {
+        grid-column: span 2;
+        padding: 0.75rem 2rem;
+    }
+</style>
+</body>
+</html>

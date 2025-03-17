@@ -1,0 +1,289 @@
+
+<!--
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Test</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+    <style>
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .question { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .button { background-color: #6b48ff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .button:hover { background-color: #5a3de6; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+        .form-group textarea { height: 100px; }
+        .error-message { color: red; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Review Test for Student: <span th:text="${studentTest.student.username}"></span></h1>
+    <p>Test: <span th:text="${studentTest.test.title}"></span></p>
+    <p>Total Score: <span th:text="${studentTest.totalScore}"></span></p>
+
+    <div th:each="review : ${answerReviews}">
+        <div class="question">
+            <h3>Question <span th:text="${review.questionIndex}"></span>: <span th:text="${review.questionText}"></span></h3>
+            <p>Student Answer: <span th:text="${review.studentAnswer != null ? review.studentAnswer : 'Not answered'}"></span></p>
+            <p>Max Score: <span th:text="${review.maxScore}"></span></p>
+            <p>Current Score: <span th:text="${review.score != null ? review.score : 'Not scored'}"></span></p>
+            <p>Current Feedback: <span th:text="${review.feedback != null ? review.feedback : 'No feedback'}"></span></p>
+
+            <div th:if="${review.descriptiveQuestion}">
+                <form th:action="@{/teacher/review/{studentAnswerId}/score(studentAnswerId=${review.answerId})}" method="post" class="form-group">
+                    <div class="form-group">
+                        <label th:for="'score_' + ${review.answerId}">Score:</label>
+                        <input type="number" th:id="'score_' + ${review.answerId}" name="score" min="0"
+                               th:max = "100" step="0.1" required
+                               th:value="${review.score != null ? review.score : ''}" placeholder="Enter score"/>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="'feedback_' + ${review.answerId}">Feedback:</label>
+                        <textarea th:id="'feedback_' + ${review.answerId}" name="feedback" placeholder="Enter feedback">
+                            <span th:text="${review.feedback != null ? review.feedback : ''}"></span>
+                        </textarea>
+                    </div>
+                    <button type="submit" class="button">Update Score</button>
+                </form>
+            </div>
+
+            <div th:unless="${review.descriptiveQuestion}">
+                <p>This is a multiple-choice question. The score is calculated automatically.</p>
+            </div>
+        </div>
+    </div>
+
+    <a th:href="@{/teacher/test/{testId}/students(testId=${studentTest.test.id})}" class="button">Back to Student Results</a>
+</div>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Test</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+    <style>
+        /* Reset default styles and set a smooth font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body styling with a light background */
+        body {
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container for centered content */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header and info styling */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6b48ff;
+        }
+
+        p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        p span {
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        /* Question card styling */
+        .question {
+            background: linear-gradient(135deg, #ffffff, #f9fbfd);
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question h3 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .question p {
+            margin: 8px 0;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #6b48ff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(107, 72, 255, 0.3);
+        }
+
+        /* Button styling */
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #6b48ff, #8e5cff);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background: linear-gradient(90deg, #5a3de6, #7d4aff);
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #e74c3c;
+            font-size: 1em;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fdeded;
+            border-radius: 5px;
+            display: block;
+        }
+
+        /* Multiple-choice info styling */
+        .question p:last-child {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .question {
+                padding: 15px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                font-size: 0.9em;
+            }
+
+            .button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Review Test for Student: <span th:text="${studentTest.student.username}"></span></h1>
+    <p>Test: <span th:text="${studentTest.test.title}"></span></p>
+    <p>Total Score: <span th:text="${studentTest.totalScore != null ? studentTest.totalScore : 'Not graded yet'}"></span></p>
+
+    <div th:each="review : ${answerReviews}">
+        <div class="question">
+            <h3>Question <span th:text="${review.questionIndex}"></span>: <span th:text="${review.questionText}"></span></h3>
+            <p>Student Answer: <span th:text="${review.studentAnswer != null ? review.studentAnswer : 'Not answered'}"></span></p>
+            <p>Max Score: <span th:text="${review.maxScore}"></span></p>
+            <p>Current Score: <span th:text="${review.score != null ? review.score : 'Not scored'}"></span></p>
+            <p>Current Feedback: <span th:text="${review.feedback != null ? review.feedback : 'No feedback'}"></span></p>
+
+            <div th:if="${review.descriptiveQuestion}">
+                <form th:action="@{/teacher/review/{studentAnswerId}/score(studentAnswerId=${review.answerId})}" method="post" class="form-group">
+                    <div class="form-group">
+                        <label th:for="'score_' + ${review.answerId}">Score:</label>
+                        <input type="number" th:id="'score_' + ${review.answerId}" name="score" min="0"
+                               th:max="${review.maxScore}" step="0.1" required
+                               th:value="${review.score != null ? review.score : ''}" placeholder="Enter score"/>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="'feedback_' + ${review.answerId}">Feedback:</label>
+                        <textarea th:id="'feedback_' + ${review.answerId}" name="feedback" placeholder="Enter feedback">
+
+                        </textarea>
+                    </div>
+                    <button type="submit" class="button">Update Score</button>
+                </form>
+            </div>
+
+            <div th:unless="${review.descriptiveQuestion}">
+                <p>This is a multiple-choice question. The score is calculated automatically.</p>
+            </div>
+        </div>
+    </div>
+
+    <a th:href="@{/teacher/test/{testId}/students(testId=${studentTest.test.id})}" class="button">Back to Student Results</a>
+    <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+</div>
+</body>
+</html>
+<!--   <span th:text="${review.feedback != null ? review.feedback : ''}"></span>-->

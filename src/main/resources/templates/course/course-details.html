@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{frame/navbar :: navbar}"></div>
+<div class="container">
+    <h1>Course Details</h1>
+    <h2>Professors and Students</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <form th:if="${user.role.name() == 'TEACHER'}" th:action="@{/admin/courses/{courseId}/removeProfessor(courseId=${courseId})}" method="post">
+                    <input type="hidden" name="professorId" th:value="${user.id}" />
+                    <button type="submit">Remove Professor</button>
+                </form>
+                <form th:if="${user.role.name() == 'STUDENT'}" th:action="@{/admin/courses/{courseId}/removeStudent(courseId=${courseId})}" method="post">
+                    <input type="hidden" name="studentId" th:value="${user.id}" />
+                    <button type="submit">Remove Student</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Available Users</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${allUsers}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <div th:if="${user.role.name() == 'TEACHER'}">
+                    <form th:action="@{/admin/courses/{courseId}/addProfessor(courseId=${courseId})}" method="post">
+                        <input type="hidden" name="professorId" th:value="${user.id}" />
+                        <button type="submit">Add as Professor</button>
+                    </form>
+                </div>
+                <div th:if="${user.role.name() == 'STUDENT'}">
+                    <form th:action="@{/admin/courses/{courseId}/addStudent(courseId=${courseId})}" method="post">
+                        <input type="hidden" name="studentId" th:value="${user.id}" />
+                        <button type="submit">Add as Student</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
