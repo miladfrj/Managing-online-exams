@@ -31,8 +31,8 @@ Managing-online-exams is a Java-based web application designed to manage educati
 
 ### Prerequisites
 - Java 17
-- Maven (bundled with `mvnw` for convenience)
-- MySQL (or your preferred database)
+- Maven
+- Postgresql
 
 ### Steps
 1. Clone the repository:
