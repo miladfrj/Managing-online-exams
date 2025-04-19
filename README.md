@@ -1,6 +1,6 @@
-# Managing-online-exams
+# Exam Cove
 
-Managing-online-exams is a Java-based web application designed to manage educational courses, create and administer online tests, and evaluate student performance. Built with Spring Boot and Maven, it supports three roles—Administrators, Teachers, and Students—with a focus on scalability and SOLID design principles.
+Exam Cove is a Java-based web application designed to manage educational courses, create and administer online tests, and evaluate student performance. Built with Spring Boot and Maven, it supports three roles—Administrators, Teachers, and Students—with a focus on scalability and SOLID design principles.
 
 ## Features
 
